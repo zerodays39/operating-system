@@ -4,10 +4,10 @@ struct Process
 { 
     int pid;  // Process ID 
     int bt;   // CPU Burst time required 
-    int at;  	
+    int at;  //arrival time
     int priority; // Priority of this process 
     
-    void input()
+    void input()	// input function
     {
     	cout<<"ENTER PID =>";
     	cin>>pid;
@@ -18,7 +18,7 @@ struct Process
 		cout<<"         ENTER PRIORITY =>";
     	cin>>priority;
     }
-    void output()
+    void output()		//to get output
     {
     	cout<<" \n         PID =>";
     	cout<<pid;
@@ -31,13 +31,12 @@ struct Process
     }
 }; 
 
-bool CmpAt(Process p1 , Process p2)
+bool CmpAt(Process p1 , Process p2)  //sorting on basis of arrival time
 {
 	return (p1.at<p2.at);
 }
   int main()
   {
-  cout<<"I AM HERE";
   	int n;
   	cout<<"ENTER NUMBER OF PROCESSES :";
   	cin>>n;
