@@ -1,0 +1,184 @@
+#include<bits/stdc++.h> 
+using namespace std; 
+struct Process 
+{ 
+    int pid;  // Process ID 
+    int bt;   // CPU Burst time required 
+    int at;  	
+    int priority; // Priority of this process 
+    
+    void input()
+    {
+    	cout<<"ENTER PID =>";
+    	cin>>pid;
+    	cout<<" ENTER BRUST TIME =>";
+    	cin>>bt;
+    	cout<<"  ENTER ARRIVAL TIME =>";
+    	cin>>at;
+		cout<<"         ENTER PRIORITY =>";
+    	cin>>priority;
+    }
+    void output()
+    {
+    	cout<<" \n         PID =>";
+    	cout<<pid;
+    	cout<<"\n   BRUST TIME =>";
+    	cout<<bt;
+		cout<<"\n ARRIVAL TIME =>";
+    	cout<<at;
+    	cout<<"\n 	  PRIORITY =>";
+    	cout<<priority;
+    }
+}; 
+
+bool CmpAt(Process p1 , Process p2)
+{
+	return (p1.at<p2.at);
+}
+  int main()
+  {
+  cout<<"I AM HERE";
+  	int n;
+  	cout<<"ENTER NUMBER OF PROCESSES :";
+  	cin>>n;
+  	cout<<"\n";
+  	struct Process p[n];
+	int queue[n];
+  	
+for(int i=0;i<n;i++)
+	{
+		p[i].input();
+		cout<<"\n";
+	}
+	sort(p , p+n , CmpAt);
+	
+	cout<<"\n \n :::::AFTER SORTING:::::";
+	
+printf("\n\n Process   \t BurstTime \t arrival time \t priority \n ");
+   
+    for(int i=0;i<n;i++)
+    {
+        printf("\n %d \t\t %d \t\t %d \t\t %d ", p[i].pid,p[i].bt,p[i].at,p[i].priority);
+    }
+	
+	int att=0,cur=0,temp[n]={0};
+
+	for(int i=0;i<n;i++)
+	{
+		if(p[cur].at==0)
+		{
+			for(int k=0;k<p[i+1].at;k++)
+			{	
+				if(p[cur].bt > 0)
+				{
+				p[cur].bt=p[cur].bt-1;
+				temp[cur]=temp[cur]+1;
+				}
+				else 
+				break;
+			}
+		}
+		else if(p[cur].priority=p[i+1].priority)
+		{	
+		for(int k=0;k<p[i+1].at;k++)
+			{
+				if(p[cur].bt > 0)
+				{
+				p[cur].bt=p[cur].bt-1;
+				temp[cur]=temp[cur]+1;
+				}
+				else 
+				break;
+			}
+		}
+		else if(p[cur].priority<p[i].priority)
+		{
+			cur=i;
+			for(int k=0;k<p[i+1].at;k++)
+			{	
+				if(p[cur].bt > 0)
+				{
+				p[cur].bt=p[cur].bt-1;
+				temp[cur]=temp[cur]+1;
+				}
+				else 
+				break;
+			}
+		}
+		else if(i == n-1)
+		{
+			for(int k=0;k<p[i].at;k++)
+			{	
+				if(p[cur].bt > 0)
+				{
+				p[cur].bt=p[cur].bt-1;
+				temp[cur]=temp[cur]+1;
+				
+				}
+				else 
+				break;
+			}
+		}
+	}
+	cout<<" \n \n \n AFTER COMING FROM PRIORITY QUEUE :";
+	
+	printf("\n\n Process   \t BurstTime \t arrival time \t priority \n ");
+    for(int i=0;i<n;i++)
+    {
+        printf("\n %d \t\t %d \t\t %d \t\t %d ", p[i].pid,p[i].bt,p[i].at,p[i].priority);
+    } 	
+	
+	cout<<"\n";
+	for(int i=0;i<n;i++)
+	{
+		cout<<temp[i]<<" | ";
+	}
+	
+	bool l =true;
+	int count =0;
+	while(l==true)
+	{
+		for(int i=0;i<n;i++)
+			{
+				if(temp[i]==p[i].bt)
+				{
+					break;
+				}
+				else if(temp[i]!= p[i].bt)
+				{	
+					if(p[i].bt>=2)
+					{
+					p[i].bt=p[i].bt-2;
+					temp[i]=temp[i]+2;	
+					}	
+					else
+					{
+					p[i].bt=0;
+					temp[i]=temp[i]+1;		
+					}
+					
+				}
+				else
+				{
+					for(int i=0 ;i<n;i++)
+					{
+						if(temp[i]==p[i].bt)
+						{
+							count ++;
+						}
+						else
+						count--;
+					}
+				}
+			}
+			if(count == n-1)
+				l=false;
+	} 
+//	cout<<" i am here";
+	cout<<"\n \n \n AFTER ROUND ROBIN :";
+	printf("\n\n Process   \t BurstTime \t arrival time \t priority \n ");
+	for(int i=0;i<n;i++)
+    {
+        printf("\n %d \t\t %d \t\t %d \t\t %d ", p[i].pid,p[i].bt,p[i].at,p[i].priority);
+    } 
+}
