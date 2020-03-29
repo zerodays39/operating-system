@@ -119,7 +119,7 @@ printf("\n\n Process   \t BurstTime \t arrival time \t priority \n ");
 			}
 		}
 	}
-	cout<<" \n \n \n AFTER COMING FROM PRIORITY QUEUE :";
+	cout<<" \n \n \n \nAFTER COMING FROM PRIORITY QUEUE :";
 	
 	printf("\n\n Process   \t BurstTime \t arrival time \t priority \n ");
     for(int i=0;i<n;i++)
