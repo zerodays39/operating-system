@@ -9,5 +9,6 @@ to second level queue. Time for which process will strictly execute must be cons
 multiples of 2.
 All the processes in second level queue will complete their execution according to round robin
 scheduling.
-Consider: 1. Queue 2 will be processed after Queue 1 becomes empty.
+Consider:
+1. Queue 2 will be processed after Queue 1 becomes empty.
 2. Priority of Queue 2 has lower priority than in Queue 1. 
